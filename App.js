@@ -1,14 +1,25 @@
+import { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
+  const [enteredGoalText, setEnteredGoalText] = useState('');
+
+  function goalInputHandler(enteredGoalText) {
+    setEnteredGoalText(enteredGoalText); 
+  };
+
+  function addGoalHandler() {
+    console.log(enteredGoalText); 
+  };
+
   return (
     <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} placeholder='Your course goal!' />
-        <Button title='Add Goad' />
+        <TextInput style={styles.textInput} placeholder='Your course goal!' onChangeText={goalInputHandler} />
+        <Button title='Add Goal' onPress={addGoalHandler} />
       </View>
       <View>
-        <Text>List of Goals...</Text>
+        <Text style={styles.goalContainer}>List of Goals...</Text>
       </View>
     </View>
   );
@@ -16,23 +27,31 @@ export default function App() {
 
 const styles = StyleSheet.create({
   appContainer: {
+    flex: 1,
     padding: 50,
-    // flex: 1,
+    paddingHorizontal: 16
     // backgroundColor: '#fff',
     // alignItems: 'center',
     // justifyContent: 'center',
   },
   inputContainer: {
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between'
-    // borderWidth: 2,
-    // borderColor: 'red', 
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc'
   },
   textInput: {
     borderWidth: 1,
     borderColor: '#cccccc',
-    width: '80%',
+    width: '70%',
     marginRight: 8,
     padding: 8
+  },
+  goalContainer: {
+    flex: 5
   }
+
 });
